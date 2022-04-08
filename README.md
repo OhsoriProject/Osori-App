@@ -1,1 +1,1 @@
-# OsoriApp
+# Osori-App
