@@ -10,6 +10,7 @@ import Tutorial2Png from "assets/images/pngs/Tutorial2.png";
 import Tutorial3Png from "assets/images/pngs/Tutorial3.png";
 import normalize from "utils/normalize";
 import LinearGradient from "react-native-linear-gradient";
+import { ButtonS } from "components/index";
 
 const TutorialItemList = [
   {
@@ -31,13 +32,9 @@ const TutorialItemList = [
   },
 ];
 
-const TutorialScreen = () => {
-  const [testRecoilValue, setTestRecoilValue] = useRecoilState(testAtom);
-  const onPressUp = () => {
-    setTestRecoilValue((p) => p + 1);
-  };
-  const onPressDown = () => {
-    setTestRecoilValue((p) => p - 1);
+const TutorialScreen = ({ navigation }) => {
+  const goMainScreen = () => {
+    navigation.replace("BottomNavigation");
   };
   return (
     <ContainerGradient
@@ -46,49 +43,45 @@ const TutorialScreen = () => {
       start={{ x: 1, y: 0 }}
       end={{ x: 0, y: 1.1 }}
     >
-      <View
-        style={{
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-          paddingTop: normalize(100, "height"),
+      <Carousel
+        sliderWidth={Dimensions.get("screen").width}
+        data={TutorialItemList}
+        itemWidth={normalize(268)}
+        renderItem={({ item, index }) => {
+          return (
+            <CarouselContainer>
+              <Image
+                style={{ width: normalize(268), height: normalize(363) }}
+                source={item.image}
+              />
+              <Text
+                style={{
+                  marginTop: normalize(4),
+                  marginBottom: normalize(16),
+                  fontSize: 25,
+                  color: "#F4F4F4",
+                }}
+              >
+                {item.title}
+              </Text>
+              <Text
+                style={{
+                  fontSize: 16,
+                  textAlign: "center",
+                  color: "#F4F4F4",
+                }}
+              >
+                {item.subtitle}
+              </Text>
+            </CarouselContainer>
+          );
         }}
-      >
-        <Carousel
-          sliderWidth={Dimensions.get("screen").width}
-          data={TutorialItemList}
-          itemWidth={normalize(268)}
-          renderItem={({ item, index }) => {
-            return (
-              <CarouselContainer>
-                <Image
-                  style={{ width: normalize(268), height: normalize(363) }}
-                  source={item.image}
-                />
-                <Text
-                  style={{
-                    marginTop: normalize(4),
-                    marginBottom: normalize(16),
-                    fontSize: 25,
-                    color: "#F4F4F4",
-                  }}
-                >
-                  {item.title}
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 16,
-                    textAlign: "center",
-                    color: "#F4F4F4",
-                  }}
-                >
-                  {item.subtitle}
-                </Text>
-              </CarouselContainer>
-            );
-          }}
-        />
-      </View>
+      />
+      <ButtonS
+        style={{ width: normalize(131) }}
+        text={"시작하기"}
+        onPress={goMainScreen}
+      />
     </ContainerGradient>
   );
 };
@@ -104,9 +97,11 @@ const ContainerGradient = styled(LinearGradient)`
   flex: 1;
   align-items: center;
   justify-content: center;
+  padding-top: ${normalize(100, "height")}px;
+  padding-bottom: ${normalize(54, "height")}px;
 `;
 
 const CarouselContainer = styled.View`
   align-items: center;
-  width: ${normalize(268)};
+  width: ${normalize(268)}px;
 `;
