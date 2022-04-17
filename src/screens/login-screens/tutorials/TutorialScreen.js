@@ -10,7 +10,7 @@ import Tutorial2Png from "assets/images/pngs/Tutorial2.png";
 import Tutorial3Png from "assets/images/pngs/Tutorial3.png";
 import normalize from "utils/normalize";
 import LinearGradient from "react-native-linear-gradient";
-import { ButtonS } from "components/index";
+import { ButtonS, CardTutorial } from "components/index";
 
 const TutorialItemList = [
   {
@@ -36,6 +36,15 @@ const TutorialScreen = ({ navigation }) => {
   const goMainScreen = () => {
     navigation.replace("BottomNavigation");
   };
+
+  const _renderTutorial = ({ item, index }) => (
+    <CardTutorial
+      image={item.image}
+      title={item.title}
+      subtitle={item.subtitle}
+    />
+  );
+
   return (
     <ContainerGradient
       colors={["#69B2FF", "#68A5FF", "#A6B3FD", "#6619FF"]}
@@ -47,35 +56,7 @@ const TutorialScreen = ({ navigation }) => {
         sliderWidth={Dimensions.get("screen").width}
         data={TutorialItemList}
         itemWidth={normalize(268)}
-        renderItem={({ item, index }) => {
-          return (
-            <CarouselContainer>
-              <Image
-                style={{ width: normalize(268), height: normalize(363) }}
-                source={item.image}
-              />
-              <Text
-                style={{
-                  marginTop: normalize(4),
-                  marginBottom: normalize(16),
-                  fontSize: 25,
-                  color: "#F4F4F4",
-                }}
-              >
-                {item.title}
-              </Text>
-              <Text
-                style={{
-                  fontSize: 16,
-                  textAlign: "center",
-                  color: "#F4F4F4",
-                }}
-              >
-                {item.subtitle}
-              </Text>
-            </CarouselContainer>
-          );
-        }}
+        renderItem={_renderTutorial}
       />
       <ButtonS
         style={{ width: normalize(131) }}

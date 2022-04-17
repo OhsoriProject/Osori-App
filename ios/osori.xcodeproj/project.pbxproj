@@ -14,6 +14,12 @@
 		298FE1488857B71CA8CA9B56 /* libPods-osori-osoriTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DCE2B76F283BB05A66F0534 /* libPods-osori-osoriTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		F0FCA2D4259D6802A85C7F81 /* libPods-osori.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD93657F5968F43B6240AAF2 /* libPods-osori.a */; };
+		2D555B045EF54F26BB42D8F0 /* GmarketSansBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A065CAB447A648E89ADCE75A /* GmarketSansBold.ttf */; };
+		5386567128C147C989576C5C /* GmarketSansLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F3D81AD42E34FCA9048949D /* GmarketSansLight.ttf */; };
+		B02E4F5EA21D4695AD6DE01D /* GmarketSansMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB7EAC721AF444EDA2C8438A /* GmarketSansMedium.ttf */; };
+		BD0C11BA10D04E168C4DDD54 /* GmarketSansTTFBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 412F4D337C4A492794B8BA40 /* GmarketSansTTFBold.ttf */; };
+		B886B644029B40D9A73677C6 /* GmarketSansTTFLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E29165F5EC641B8BBA20D00 /* GmarketSansTTFLight.ttf */; };
+		08AAB651661B452AA9948A47 /* GmarketSansTTFMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 698CDB186D144E4081DE0C62 /* GmarketSansTTFMedium.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +50,12 @@
 		CEC0D441514E5E5C66B0AB1B /* Pods-osori-osoriTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-osori-osoriTests.release.xcconfig"; path = "Target Support Files/Pods-osori-osoriTests/Pods-osori-osoriTests.release.xcconfig"; sourceTree = "<group>"; };
 		E68EC10EA3BAC96F9F4E2DA3 /* Pods-osori.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-osori.debug.xcconfig"; path = "Target Support Files/Pods-osori/Pods-osori.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		A065CAB447A648E89ADCE75A /* GmarketSansBold.ttf */ = {isa = PBXFileReference; name = "GmarketSansBold.ttf"; path = "../src/assets/fonts/GmarketSansBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1F3D81AD42E34FCA9048949D /* GmarketSansLight.ttf */ = {isa = PBXFileReference; name = "GmarketSansLight.ttf"; path = "../src/assets/fonts/GmarketSansLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DB7EAC721AF444EDA2C8438A /* GmarketSansMedium.ttf */ = {isa = PBXFileReference; name = "GmarketSansMedium.ttf"; path = "../src/assets/fonts/GmarketSansMedium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		412F4D337C4A492794B8BA40 /* GmarketSansTTFBold.ttf */ = {isa = PBXFileReference; name = "GmarketSansTTFBold.ttf"; path = "../src/assets/fonts/GmarketSansTTFBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2E29165F5EC641B8BBA20D00 /* GmarketSansTTFLight.ttf */ = {isa = PBXFileReference; name = "GmarketSansTTFLight.ttf"; path = "../src/assets/fonts/GmarketSansTTFLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		698CDB186D144E4081DE0C62 /* GmarketSansTTFMedium.ttf */ = {isa = PBXFileReference; name = "GmarketSansTTFMedium.ttf"; path = "../src/assets/fonts/GmarketSansTTFMedium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +146,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				12F1E62431700C498E86EADD /* Pods */,
+				40381987B5C34D80A9DDE2FC /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -148,6 +161,20 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		40381987B5C34D80A9DDE2FC /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				A065CAB447A648E89ADCE75A /* GmarketSansBold.ttf */,
+				1F3D81AD42E34FCA9048949D /* GmarketSansLight.ttf */,
+				DB7EAC721AF444EDA2C8438A /* GmarketSansMedium.ttf */,
+				412F4D337C4A492794B8BA40 /* GmarketSansTTFBold.ttf */,
+				2E29165F5EC641B8BBA20D00 /* GmarketSansTTFLight.ttf */,
+				698CDB186D144E4081DE0C62 /* GmarketSansTTFMedium.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -245,6 +272,12 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				2D555B045EF54F26BB42D8F0 /* GmarketSansBold.ttf in Resources */,
+				5386567128C147C989576C5C /* GmarketSansLight.ttf in Resources */,
+				B02E4F5EA21D4695AD6DE01D /* GmarketSansMedium.ttf in Resources */,
+				BD0C11BA10D04E168C4DDD54 /* GmarketSansTTFBold.ttf in Resources */,
+				B886B644029B40D9A73677C6 /* GmarketSansTTFLight.ttf in Resources */,
+				08AAB651661B452AA9948A47 /* GmarketSansTTFMedium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
