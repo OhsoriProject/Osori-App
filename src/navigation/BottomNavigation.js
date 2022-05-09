@@ -23,7 +23,7 @@ const mainRoutes = [
     name: "PlaylistNavigation",
     component: PlaylistNavigation,
     initRouteName: "PlaylistMainScreen",
-    label: "Nav2",
+    label: "플레이리스트",
   },
 ];
 
