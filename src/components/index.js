@@ -1,3 +1,5 @@
+import HeaderM from "./headers/HeaderM";
+
 import CardTutorial from "./cards/CardTutorial";
 
 import ChattingBubble from "./lists/ChattingBubble";
@@ -7,4 +9,4 @@ import ChatInput from "./inputs/ChatInput";
 
 export { ButtonS } from "./buttons/ButtonS";
 
-export { CardTutorial, ChattingBubble, PlaylistBubble, ChatInput };
+export { CardTutorial, ChattingBubble, PlaylistBubble, ChatInput, HeaderM };

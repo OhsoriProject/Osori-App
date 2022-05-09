@@ -8,7 +8,12 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { ChatInput, ChattingBubble, PlaylistBubble } from "components/index";
+import {
+  ChatInput,
+  ChattingBubble,
+  HeaderM,
+  PlaylistBubble,
+} from "components/index";
 import ChatList from "./Components/ChatList";
 import styled from "styled-components";
 import normalize from "utils/normalize";
@@ -37,6 +42,7 @@ const ChatScreen = () => {
 
   return (
     <Body>
+      <HeaderM title={"오소리"} />
       <ChatList messages={messages} />
       <StyledKeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "none"}
