@@ -7,7 +7,7 @@ export const ButtonS = ({ text, onPress, style }) => {
   return (
     <TouchableOpacity onPress={onPress && onPress}>
       <Container style={style}>
-        <Text style={{ color: "#f4f4f4", fontWeight: "600" }}>{text}</Text>
+        <StyledText>{text}</StyledText>
       </Container>
     </TouchableOpacity>
   );
@@ -20,4 +20,12 @@ const Container = styled(View)`
   align-items: center;
   justify-content: center;
   border-radius: 6px;
+`;
+
+const StyledText = styled.Text`
+  font-family: "GmarketSansTTFMedium";
+  font-size: ${normalize(16)}px;
+  color: #f4f4f4;
+  font-weight: 600;
+  text-align: center;
 `;
