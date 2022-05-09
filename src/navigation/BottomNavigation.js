@@ -8,15 +8,16 @@ import PlaylistNavigation from "./PlaylistNavigation";
 const Tab = createBottomTabNavigator();
 
 const isTabBarVisible = (route) => {
-  const routeName = getFocusedRouteNameFromRoute(route) ?? "ChatScreen";
-  return ["ChatScreen", "PlaylistMainScreen"].includes(routeName);
+  const routeName = getFocusedRouteNameFromRoute(route) ?? "ChatMainScreen";
+  console.log(getFocusedRouteNameFromRoute(route));
+  return ["ChatMainScreen", "PlaylistMainScreen"].includes(routeName);
 };
 
 const mainRoutes = [
   {
     name: "ChatNavigation",
     component: ChatNavigation,
-    initRouteName: "ChatScreen",
+    initRouteName: "ChatMainScreen",
     label: "채팅",
   },
   {
@@ -30,7 +31,7 @@ const mainRoutes = [
 export default function BottomNavigation() {
   return (
     <Tab.Navigator
-      initialRouteName="ChatScreen"
+      initialRouteName="ChatMainScreen"
       navigationOptions={{ headerShown: false }}
       screenOptions={({ route }) => ({
         headerShown: false,
