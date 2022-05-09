@@ -1,10 +1,17 @@
-import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import React, { useState } from "react";
+import {
+  Text,
+  TouchableOpacity,
+  View,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { ChattingBubble, PlaylistBubble } from "components/index";
+import { ChatInput, ChattingBubble, PlaylistBubble } from "components/index";
 import ChatList from "./Components/ChatList";
 import styled from "styled-components";
+import normalize from "utils/normalize";
 
 const messages = [
   { content: "나 오늘 우울해", sender: "me", type: "chat" },
@@ -23,9 +30,19 @@ const messages = [
 ];
 
 const ChatScreen = () => {
+  const [text, setText] = useState("");
+  const onChangeText = (text) => {
+    setText(text);
+  };
+
   return (
     <Body>
       <ChatList messages={messages} />
+      <StyledKeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "none"}
+      >
+        <ChatInput value={text} onChangeText={onChangeText} />
+      </StyledKeyboardAvoidingView>
     </Body>
   );
 };
@@ -35,4 +52,8 @@ export default ChatScreen;
 const Body = styled(SafeAreaView)`
   flex: 1;
   background-color: white;
+`;
+
+const StyledKeyboardAvoidingView = styled(KeyboardAvoidingView)`
+  padding: 0px ${normalize(20)}px;
 `;
