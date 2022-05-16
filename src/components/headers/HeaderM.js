@@ -6,16 +6,16 @@ import IcBack from "assets/images/svgs/IcBack.svg";
 import Space from "utils/styledSpace";
 import normalize from "utils/normalize";
 
-const HeaderM = ({ title }) => {
+const HeaderM = ({ title, hasBack = true }) => {
   const navigation = useNavigation();
   return (
     <>
       <Container>
         <TouchableOpacity
-          onPress={() => navigation.goBack()}
+          onPress={() => (hasBack ? navigation.goBack() : null)}
           style={{ width: normalize(20) }}
         >
-          <IcBack />
+          {hasBack && <IcBack />}
         </TouchableOpacity>
         <TitleText>{title}</TitleText>
         <Space w={20} />
