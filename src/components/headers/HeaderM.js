@@ -33,7 +33,7 @@ const Container = styled.View`
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
-  padding: ${normalize(4)}px ${normalize(16)}px;
+  padding: ${normalize(8)}px ${normalize(16)}px;
 `;
 
 const TitleText = styled.Text`
@@ -46,7 +46,7 @@ const TitleText = styled.Text`
 
 const BottomLineContainer = styled.View`
   align-items: center;
-  margin-top: ${normalize(8)}px;
+  margin-top: ${normalize(4)}px;
   margin-bottom: ${normalize(12)}px;
 `;
 

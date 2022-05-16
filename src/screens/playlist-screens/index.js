@@ -1,3 +1,4 @@
 import PlaylistMainScreen from "./PlaylistMainScreen/PlaylistMainScreen";
+import PlaylistDetailScreen from "./PlaylistDetailScreen/PlaylistDetailScreen";
 
-export { PlaylistMainScreen };
+export { PlaylistMainScreen, PlaylistDetailScreen };

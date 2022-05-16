@@ -25,11 +25,17 @@ const TMP_LIST = [
 
 const PlaylistMainScreen = ({ navigation }) => {
   const onPressPlaylist = () => {
-    navigation.navigate("");
+    navigation.navigate("PlaylistDetailScreen");
   };
 
   const _renderItem = ({ item, index }) => {
-    return <ListPlaylist title={item.title} songNum={item.length} />;
+    return (
+      <ListPlaylist
+        onPress={onPressPlaylist}
+        title={item.title}
+        songNum={item.length}
+      />
+    );
   };
   return (
     <Body>
