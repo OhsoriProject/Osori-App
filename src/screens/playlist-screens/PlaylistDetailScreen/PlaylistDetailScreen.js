@@ -23,7 +23,7 @@ const TMP_LIST = [
   { title: "작업하기 좋은 핫플 카페에서 들었던 음악", length: 24 },
 ];
 
-const PlaylistMainScreen = ({ navigation }) => {
+const PlaylistDetailScreen = ({ navigation }) => {
   const onPressPlaylist = () => {
     navigation.navigate("");
   };
@@ -33,17 +33,12 @@ const PlaylistMainScreen = ({ navigation }) => {
   };
   return (
     <Body>
-      <HeaderM hasBack={false} title="플레이리스트" />
-      <FlatList
-        style={{ flex: 1, paddingHorizontal: normalize(22) }}
-        data={TMP_LIST}
-        renderItem={_renderItem}
-      />
+      <HeaderM title="플레이리스트 상세 타이틀" />
     </Body>
   );
 };
 
-export default PlaylistMainScreen;
+export default PlaylistDetailScreen;
 const Body = styled(SafeAreaView)`
   flex: 1;
   background-color: white;

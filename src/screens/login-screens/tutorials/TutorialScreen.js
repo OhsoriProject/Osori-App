@@ -1,5 +1,4 @@
 import React from "react";
-import { Navigation1Home } from "screens/presenter/index";
 import { useRecoilState } from "recoil";
 import { testAtom } from "store/atom/common";
 import { Dimensions, Image, SafeAreaView, Text, View } from "react-native";
