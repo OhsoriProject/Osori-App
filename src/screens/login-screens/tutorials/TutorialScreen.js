@@ -32,8 +32,8 @@ const TutorialItemList = [
 ];
 
 const TutorialScreen = ({ navigation }) => {
-  const goMainScreen = () => {
-    navigation.replace("BottomNavigation");
+  const goLoginScreen = () => {
+    navigation.replace("LoginScreen");
   };
 
   const _renderTutorial = ({ item, index }) => (
@@ -60,7 +60,7 @@ const TutorialScreen = ({ navigation }) => {
       <ButtonS
         style={{ width: normalize(131) }}
         text={"시작하기"}
-        onPress={goMainScreen}
+        onPress={goLoginScreen}
       />
     </ContainerGradient>
   );
