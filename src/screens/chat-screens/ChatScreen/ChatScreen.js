@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Text,
   TouchableOpacity,
@@ -17,8 +17,11 @@ import {
 import ChatList from "./Components/ChatList";
 import styled from "styled-components";
 import normalize from "utils/normalize";
+import { useRecoilState } from "recoil";
+import { UserIdAtom } from "store/atom/auth";
+import { getMessages, postMessage } from "api/MessageApi";
 
-const messages = [
+const TMP_MESSAGES = [
   { content: "나 오늘 우울해", sender: "me", type: "chat" },
   {
     content: "우울할 땐 이런 음악을 들어보세요!",
@@ -36,9 +39,38 @@ const messages = [
 
 const ChatScreen = () => {
   const [text, setText] = useState("");
+  const [messages, setMessages] = useState([...TMP_MESSAGES]);
+  const [user] = useRecoilState(UserIdAtom);
+
   const onChangeText = (text) => {
     setText(text);
   };
+
+  const getUserMessageList = async () => {
+    try {
+      const result = await getMessages(user.id);
+      console.log(result);
+      setMessages(result.chats);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const onSend = async () => {
+    if (text.length == 0) return;
+    setText("");
+    try {
+      const result = await postMessage(user.id, text);
+      console.log(result);
+      getUserMessageList();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getUserMessageList();
+  }, [user]);
 
   return (
     <Body>
@@ -47,7 +79,7 @@ const ChatScreen = () => {
       <StyledKeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "none"}
       >
-        <ChatInput value={text} onChangeText={onChangeText} />
+        <ChatInput value={text} onChangeText={onChangeText} onPress={onSend} />
       </StyledKeyboardAvoidingView>
     </Body>
   );

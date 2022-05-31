@@ -6,10 +6,13 @@ import Space from "utils/styledSpace";
 
 const ChatList = ({ messages }) => {
   const _renderItem = ({ item, index }) => {
-    if (item.type == "chat") {
+    if (!item.hasOwnProperty("playlist")) {
       return (
         <>
-          <ChattingBubble message={item.content} isMe={item.sender === "me"} />
+          <ChattingBubble
+            message={item.content}
+            isMe={item.sender === "user"}
+          />
           <Space h={16} />
         </>
       );
