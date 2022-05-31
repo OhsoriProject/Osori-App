@@ -34,9 +34,7 @@ const LoginScreen = ({ navigation }) => {
 
   const onPressLogin = async () => {
     try {
-      console.log(id, password);
       const result = await postSignIn(id, password);
-      console.log(result);
       setUser(result);
       navigation.replace("BottomNavigation");
     } catch (e) {

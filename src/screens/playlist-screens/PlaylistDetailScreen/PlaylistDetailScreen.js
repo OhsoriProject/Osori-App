@@ -1,22 +1,11 @@
-import {
-  CardYoutube,
-  HeaderM,
-  ListMusicItem,
-  ListPlaylist,
-} from "components/index";
-import React, { useRef, useState } from "react";
-import {
-  SafeAreaView,
-  Text,
-  TouchableOpacity,
-  View,
-  FlatList,
-  Modal,
-} from "react-native";
+import { CardYoutube, HeaderM } from "components/index";
+import React, { useEffect, useRef, useState } from "react";
+import { SafeAreaView } from "react-native";
+import { UserIdAtom } from "store/atom/auth";
 import styled from "styled-components";
 import normalize from "utils/normalize";
+import { useRecoilState } from "recoil";
 import FlatlistMusics from "./Components/FlatlistMusics";
-import ModalPlaylistSave from "./Components/ModalPlaylistSave";
 import YoutubeControl from "./Components/YoutubeControl";
 
 const TMP_VIDEO_LIST = ["", "vg6Iq_Es3Wk", "8dJyRm2jJ-U", "F9ldojZWBiM"];
@@ -29,15 +18,34 @@ const TMP_PLAYLIST = [
   },
 ];
 
-const PlaylistDetailScreen = ({ navigation }) => {
+const PlaylistDetailScreen = ({ navigation, route }) => {
   const youtubeRef = useRef();
+
+  const [user] = useRecoilState(UserIdAtom);
 
   const [videoIndex, setVideoIndex] = useState(0);
   const [modalVisivle, setModalVisible] = useState(false);
+  const [playlistDetail, setPlaylistDetail] = useState({});
 
   const onPressPlaylist = () => {
     navigation.navigate("");
   };
+
+  const getPlaylistDetail = async () => {
+    try {
+      const result = await getPlaylistDetailRequest(
+        user.id,
+        route.params.playlistId
+      );
+      setPlaylistDetail(result.playlist);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getPlaylistDetail();
+  }, [user]);
 
   return (
     <Body>

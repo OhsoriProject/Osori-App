@@ -39,7 +39,7 @@ const TMP_MESSAGES = [
 
 const ChatScreen = () => {
   const [text, setText] = useState("");
-  const [messages, setMessages] = useState([...TMP_MESSAGES]);
+  const [messages, setMessages] = useState([]);
   const [user] = useRecoilState(UserIdAtom);
 
   const onChangeText = (text) => {
@@ -49,7 +49,6 @@ const ChatScreen = () => {
   const getUserMessageList = async () => {
     try {
       const result = await getMessages(user.id);
-      console.log(result);
       setMessages(result.chats);
     } catch (e) {
       console.log(e);
@@ -60,8 +59,7 @@ const ChatScreen = () => {
     if (text.length == 0) return;
     setText("");
     try {
-      const result = await postMessage(user.id, text);
-      console.log(result);
+      await postMessage(user.id, text);
       getUserMessageList();
     } catch (e) {
       console.log(e);
