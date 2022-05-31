@@ -9,6 +9,7 @@ import ListPlaylist from "./lists/ListPlaylist";
 import ListMusicItem from "./lists/ListMusicItem";
 
 import ChatInput from "./inputs/ChatInput";
+import InputS from "./inputs/InputS";
 
 export { ButtonS } from "./buttons/ButtonS";
 
@@ -21,4 +22,5 @@ export {
   ListPlaylist,
   CardYoutube,
   ListMusicItem,
+  InputS,
 };
