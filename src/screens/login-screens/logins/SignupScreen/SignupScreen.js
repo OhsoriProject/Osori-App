@@ -21,25 +21,24 @@ import Logo from "assets/images/pngs/LogoSplash1.png";
 import Space from "utils/styledSpace";
 import colors from "utils/colors";
 import LinearGradient from "react-native-linear-gradient";
+import { postSignIn, postSignUp } from "api/AuthApi";
 
 const SignupScreen = ({ navigation }) => {
   const [id, setId] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [nickname, setNickname] = React.useState("");
 
-  const onPressSignup = () => {
-    navigation.replace("BottomNavigation");
+  const onPressSignup = async () => {
+    try {
+      const result = await postSignUp(id, password, nickname);
+      console.log(result);
+      goLoginScreen();
+    } catch (e) {
+      console.log("signupError", e);
+    }
   };
   const goLoginScreen = () => {
     navigation.replace("LoginScreen");
-  };
-  const ButtonStyle = {
-    backgroundColor: colors.primary,
-    // borderRadius: normalize(50),
-    width: Dimensions.get("screen").width - normalize(100),
-  };
-  const ButtonStyleSignUp = {
-    // borderRadius: normalize(50),
-    width: Dimensions.get("screen").width - normalize(100),
   };
 
   return (
@@ -55,7 +54,13 @@ const SignupScreen = ({ navigation }) => {
       <TitleText>SIGN UP</TitleText>
       <Space h={20} />
       <InputContainer>
-        <InputS placeholder="ID" value={id} onChangeText={setId} />
+        <InputS
+          placeholder="NICKNAME"
+          value={nickname}
+          onChangeText={setNickname}
+        />
+        <Space h={20} />
+        <InputS placeholder="EMAIL" value={id} onChangeText={setId} />
         <Space h={20} />
         <InputS
           placeholder="PASSWORD"
@@ -78,15 +83,13 @@ const SignupScreen = ({ navigation }) => {
 
 export default SignupScreen;
 
-const Body = styled(SafeAreaView)`
-  flex: 1;
-  background-color: white;
-`;
-
-const Container = styled.View`
-  flex: 1;
-  align-items: center;
-`;
+const ButtonStyle = {
+  backgroundColor: colors.primary,
+  width: Dimensions.get("screen").width - normalize(100),
+};
+const ButtonStyleSignUp = {
+  width: Dimensions.get("screen").width - normalize(100),
+};
 
 const LogoImage = styled.Image`
   width: ${normalize(217)}px;
