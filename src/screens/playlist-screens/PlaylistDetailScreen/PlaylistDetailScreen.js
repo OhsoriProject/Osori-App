@@ -49,7 +49,7 @@ const PlaylistDetailScreen = ({ navigation }) => {
   const youtubeRef = useRef();
 
   const [videoIndex, setVideoIndex] = useState(0);
-  const [modalVisivle, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const onPressMore = () => {
     setModalVisible(true);
@@ -81,7 +81,7 @@ const PlaylistDetailScreen = ({ navigation }) => {
         youtubeRef={youtubeRef}
         videoIndex={videoIndex}
       />
-      <Modal isVisible={modalVisivle}>
+      <Modal isVisible={modalVisible}>
         <ModalContainer>
           <ModalWrapper>
             <ModalTitleText>플레이리스트를 저장할까요?</ModalTitleText>
