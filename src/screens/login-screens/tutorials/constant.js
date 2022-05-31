@@ -1,3 +1,7 @@
+import Tutorial1Png from "assets/images/pngs/Tutorial1.png";
+import Tutorial2Png from "assets/images/pngs/Tutorial2.png";
+import Tutorial3Png from "assets/images/pngs/Tutorial3.png";
+
 export const TutorialItemList = [
   {
     image: Tutorial1Png,
