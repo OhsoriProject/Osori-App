@@ -23,25 +23,26 @@ import Logo from "assets/images/pngs/LogoSplash1.png";
 import Space from "utils/styledSpace";
 import colors from "utils/colors";
 import LinearGradient from "react-native-linear-gradient";
+import { postSignIn } from "api/AuthApi";
+import { useRecoilState } from "recoil";
+import { UserIdAtom } from "store/atom/auth";
 
 const LoginScreen = ({ navigation }) => {
   const [id, setId] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [user, setUser] = useRecoilState(UserIdAtom);
 
-  const onPressLogin = () => {
-    navigation.replace("BottomNavigation");
+  const onPressLogin = async () => {
+    try {
+      const result = await postSignIn(id, password);
+      setUser(result);
+      navigation.replace("BottomNavigation");
+    } catch (e) {
+      console.log("signupError", e);
+    }
   };
   const goSignupScreen = () => {
     navigation.replace("SignupScreen");
-  };
-  const ButtonStyle = {
-    backgroundColor: colors.primary,
-    // borderRadius: normalize(50),
-    width: Dimensions.get("screen").width - normalize(100),
-  };
-  const ButtonStyleSignUp = {
-    // borderRadius: normalize(50),
-    width: Dimensions.get("screen").width - normalize(100),
   };
 
   return (
@@ -83,17 +84,14 @@ const LoginScreen = ({ navigation }) => {
 
 export default LoginScreen;
 
-const Body = styled(SafeAreaView)`
-  flex: 1;
-  background-color: white;
-`;
+const ButtonStyle = {
+  backgroundColor: colors.primary,
 
-const Container = styled.View`
-  flex: 1;
-  align-items: center;
-  background-color: transparent;
-`;
-
+  width: Dimensions.get("screen").width - normalize(100),
+};
+const ButtonStyleSignUp = {
+  width: Dimensions.get("screen").width - normalize(100),
+};
 const LogoImage = styled.Image`
   width: ${normalize(217)}px;
   height: ${normalize(240)}px;

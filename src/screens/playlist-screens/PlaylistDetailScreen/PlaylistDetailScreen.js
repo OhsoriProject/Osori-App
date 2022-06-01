@@ -13,10 +13,13 @@ import {
   View,
   FlatList,
 } from "react-native";
+import { SafeAreaView } from "react-native";
+import { UserIdAtom } from "store/atom/auth";
+
 import styled from "styled-components";
 import normalize from "utils/normalize";
+import { useRecoilState } from "recoil";
 import FlatlistMusics from "./Components/FlatlistMusics";
-import ModalPlaylistSave from "./Components/ModalPlaylistSave";
 import YoutubeControl from "./Components/YoutubeControl";
 import Modal from "react-native-modal";
 import colors from "utils/colors";
@@ -45,15 +48,19 @@ const ButtonStyleNO = {
   flex: 1,
 };
 
-const PlaylistDetailScreen = ({ navigation }) => {
+const PlaylistDetailScreen = ({ navigation,route }) => {
   const youtubeRef = useRef();
 
-  const [videoIndex, setVideoIndex] = useState(0);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [user] = useRecoilState(UserIdAtom);
 
+  const [videoIndex, setVideoIndex] = useState(0);
+
+  const [modalVisible, setModalVisible] = useState(false);
+  const [playlistDetail, setPlaylistDetail] = useState({});
   const onPressMore = () => {
     setModalVisible(true);
   };
+
 
   const onPressModalYes = () => {
     setModalVisible(false);
@@ -62,6 +69,22 @@ const PlaylistDetailScreen = ({ navigation }) => {
   const onPressModalNo = () => {
     setModalVisible(false);
   };
+
+  const getPlaylistDetail = async () => {
+    try {
+      const result = await getPlaylistDetailRequest(
+        user.id,
+        route.params.playlistId
+      );
+      setPlaylistDetail(result.playlist);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getPlaylistDetail();
+  }, [user]);
 
   return (
     <Body>

@@ -1,5 +1,6 @@
+import { getPlaylistsRequest } from "api/PlaylistAPI";
 import { HeaderM, ListPlaylist } from "components/index";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   SafeAreaView,
   Text,
@@ -7,26 +8,31 @@ import {
   View,
   FlatList,
 } from "react-native";
+import { UserIdAtom } from "store/atom/auth";
 import styled from "styled-components";
 import normalize from "utils/normalize";
-
-const TMP_LIST = [
-  { title: "작업하기 좋은 핫플 카페에서 들었던 음악", length: 24 },
-  { title: "작업하기 좋은 핫플 카페에서 들었던 음악", length: 24 },
-  { title: "작업하기 좋은 핫플 카페에서 들었던 음악", length: 24 },
-  { title: "작업하기 좋은 핫플 카페에서 들었던 음악", length: 24 },
-  { title: "작업하기 좋은 핫플 카페에서 들었던 음악", length: 24 },
-  { title: "작업하기 좋은 핫플 카페에서 들었던 음악", length: 24 },
-  { title: "작업하기 좋은 핫플 카페에서 들었던 음악", length: 24 },
-  { title: "작업하기 좋은 핫플 카페에서 들었던 음악", length: 24 },
-  { title: "작업하기 좋은 핫플 카페에서 들었던 음악", length: 24 },
-  { title: "작업하기 좋은 핫플 카페에서 들었던 음악", length: 24 },
-];
+import { useRecoilState } from "recoil";
 
 const PlaylistMainScreen = ({ navigation }) => {
-  const onPressPlaylist = () => {
-    navigation.navigate("PlaylistDetailScreen");
+  const [playlists, setPlaylists] = useState();
+  const [user] = useRecoilState(UserIdAtom);
+
+  const onPressPlaylist = (playlistId) => {
+    navigation.navigate("PlaylistDetailScreen", { playlistId });
   };
+
+  const getPlayList = async () => {
+    try {
+      const result = await getPlaylistsRequest(user.id);
+      setPlaylists(result.playlists);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getPlayList();
+  }, [user]);
 
   const _renderItem = ({ item, index }) => {
     return (
@@ -42,7 +48,7 @@ const PlaylistMainScreen = ({ navigation }) => {
       <HeaderM hasBack={false} title="플레이리스트" />
       <FlatList
         style={{ flex: 1, paddingHorizontal: normalize(22) }}
-        data={TMP_LIST}
+        data={playlists}
         renderItem={_renderItem}
       />
     </Body>
