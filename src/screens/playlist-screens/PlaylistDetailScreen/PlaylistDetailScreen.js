@@ -13,7 +13,6 @@ import {
   View,
   FlatList,
 } from "react-native";
-import { SafeAreaView } from "react-native";
 import { UserIdAtom } from "store/atom/auth";
 
 import styled from "styled-components";
@@ -48,7 +47,7 @@ const ButtonStyleNO = {
   flex: 1,
 };
 
-const PlaylistDetailScreen = ({ navigation,route }) => {
+const PlaylistDetailScreen = ({ navigation, route }) => {
   const youtubeRef = useRef();
 
   const [user] = useRecoilState(UserIdAtom);
@@ -60,7 +59,6 @@ const PlaylistDetailScreen = ({ navigation,route }) => {
   const onPressMore = () => {
     setModalVisible(true);
   };
-
 
   const onPressModalYes = () => {
     setModalVisible(false);
