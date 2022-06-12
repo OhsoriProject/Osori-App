@@ -70,10 +70,7 @@ const PlaylistDetailScreen = ({ navigation, route }) => {
 
   const getPlaylistDetail = async () => {
     try {
-      const result = await getPlaylistDetailRequest(
-        user.id,
-        route.params.playlistId
-      );
+      const result = await getPlaylistDetailRequest(route.params.playlistId);
       setPlaylistDetail(result.playlist);
     } catch (e) {
       console.log(e);

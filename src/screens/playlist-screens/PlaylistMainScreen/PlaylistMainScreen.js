@@ -23,7 +23,7 @@ const PlaylistMainScreen = ({ navigation }) => {
 
   const getPlayList = async () => {
     try {
-      const result = await getPlaylistsRequest(user.id);
+      const result = await getPlaylistsRequest();
       setPlaylists(result.playlists);
     } catch (e) {
       console.log(e);

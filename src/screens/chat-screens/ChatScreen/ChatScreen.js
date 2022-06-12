@@ -61,7 +61,7 @@ const ChatScreen = () => {
     setMessages(newMessage);
     setText("");
     try {
-      await postMessage(user.id, text);
+      await postMessage(text);
       getUserMessageList();
     } catch (e) {
       console.log(e);
