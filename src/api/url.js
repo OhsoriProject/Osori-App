@@ -1,3 +1,5 @@
 import { BASE_URL } from "@env";
 
-export const ROOT_URL = BASE_URL || "http://localhost:8000";
+const ROOT_URL = "http://52.79.234.125:8080";
+// ROOT_URL = BASE_URL || "http://localhost:8000";
+export { ROOT_URL };

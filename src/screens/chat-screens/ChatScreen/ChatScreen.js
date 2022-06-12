@@ -57,6 +57,8 @@ const ChatScreen = () => {
 
   const onSend = async () => {
     if (text.length == 0) return;
+    let newMessage = [...messages, { content: text, sender: "user" }];
+    setMessages(newMessage);
     setText("");
     try {
       await postMessage(user.id, text);
