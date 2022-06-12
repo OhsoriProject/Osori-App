@@ -5,7 +5,6 @@ import normalize from "utils/normalize";
 import Space from "utils/styledSpace";
 
 const ChatList = ({ messages }) => {
-  console.log(messages);
   const _renderItem = ({ item, index }) => {
     if (!item.hasOwnProperty("playlist")) {
       return (
