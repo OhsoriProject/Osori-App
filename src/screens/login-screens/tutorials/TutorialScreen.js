@@ -10,12 +10,16 @@ import { UserIdAtom } from "store/atom/auth";
 import { TutorialItemList } from "./constant";
 
 const TutorialScreen = ({ navigation }) => {
-  const [user] = useRecoilState(UserIdAtom);
+  const [user, setUser] = useRecoilState(UserIdAtom);
   const goLoginScreen = () => {
     navigation.replace("LoginScreen");
   };
 
   useEffect(() => {
+    // setUser({
+    //   id: null,
+    //   nickname: null,
+    // });
     if (user.id !== null) {
       navigation.replace("BottomNavigation");
     }

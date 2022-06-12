@@ -27,6 +27,7 @@
     "react-native-thumbnail-video": "^0.1.2",
     "react-native-youtube": "^2.0.2",
     "recoil": "^0.5.2",
+    "recoil-nexus": "^0.3.15",
     "styled-components": "^5.3.5"
   },
   "devDependencies": {

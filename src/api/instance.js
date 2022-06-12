@@ -1,4 +1,6 @@
 import axios from "axios";
+import { getRecoil } from "recoil-nexus";
+import { UserIdAtom } from "store/atom/auth";
 import { ROOT_URL } from "./url";
 
 export const wrapRequest = (func) => {
@@ -23,10 +25,12 @@ export const instance = () => {
       // "Access-Control-Allow-Headers": "*",
     },
   });
-
+  console.log(ROOT_URL);
   instance.interceptors.request.use(
     function (config) {
       // 요청 바로 직전
+      const token = getRecoil(UserIdAtom);
+      config.headers["Authorization"] = "Bearer " + token.token.accessToken;
 
       return config;
     },
