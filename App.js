@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from "react";
+import React, { useEffect } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -24,33 +24,36 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from "react-native/Libraries/NewAppScreen";
-import { NavigationContainer } from "@react-navigation/native";
+import {
+  NavigationContainer,
+  StackActions,
+  useNavigationContainerRef,
+} from "@react-navigation/native";
 import RootNavigation from "./src/navigation/RootNavigation";
-import { RecoilRoot } from "recoil";
-import RecoilNexus from "recoil-nexus";
+import { RecoilRoot, useRecoilState } from "recoil";
+import RecoilNexus, { getRecoil } from "recoil-nexus";
+import { UserIdAtom } from "store/atom/auth";
 
 const App = () => {
   const isDarkMode = useColorScheme() === "dark";
+  const navigationRef = useNavigationContainerRef();
+
+  const [user] = useRecoilState(UserIdAtom);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  useEffect(() => {
+    if (!user.id) {
+      navigationRef.current.dispatch(StackActions.replace("LoginNavigation"));
+    }
+  }, [user]);
+
   return (
-    <RecoilRoot>
-      <RecoilNexus />
-      <React.Suspense
-        fallback={
-          <View>
-            <Text>Loading</Text>
-          </View>
-        }
-      >
-        <NavigationContainer>
-          <RootNavigation />
-        </NavigationContainer>
-      </React.Suspense>
-    </RecoilRoot>
+    <NavigationContainer ref={navigationRef}>
+      <RootNavigation />
+    </NavigationContainer>
   );
 };
 
