@@ -1,4 +1,7 @@
 import axios from "axios";
+import { Alert } from "react-native";
+import { getRecoil, setRecoil } from "recoil-nexus";
+import { UserIdAtom } from "store/atom/auth";
 import { ROOT_URL } from "./url";
 
 export const wrapRequest = (func) => {
@@ -23,10 +26,13 @@ export const instance = () => {
       // "Access-Control-Allow-Headers": "*",
     },
   });
-
+  console.log(ROOT_URL);
   instance.interceptors.request.use(
     function (config) {
       // 요청 바로 직전
+      const token = getRecoil(UserIdAtom);
+      if (token.token)
+        config.headers["Authorization"] = "Bearer " + token.token.accessToken;
 
       return config;
     },
@@ -52,6 +58,21 @@ export const instance = () => {
           응답 에러 처리를 작성합니다.
           .catch() 으로 이어집니다.
       */
+      if (error?.response?.status == 401) {
+        Alert.alert("로그인이 필요합니다.", "로그인 페이지로 이동합니다.", [
+          {
+            text: "확인",
+            onPress: () => {
+              setRecoil(UserIdAtom, {
+                id: null,
+                nickname: null,
+              });
+              // 로그인 페이지로 이동
+              // navigation.navigate("Login");
+            },
+          },
+        ]);
+      }
       return Promise.reject(error);
     }
   );

@@ -9,23 +9,29 @@ const ChatList = ({ messages }) => {
     if (!item.hasOwnProperty("playlist")) {
       return (
         <>
+          <Space h={16} />
           <ChattingBubble
             message={item.content}
             isMe={item.sender === "user"}
           />
-          <Space h={16} />
         </>
       );
     } else {
       return (
         <>
-          <PlaylistBubble />
           <Space h={16} />
+          <PlaylistBubble />
         </>
       );
     }
   };
-  return <ChatFlatList data={messages} renderItem={_renderItem} />;
+  return (
+    <ChatFlatList
+      inverted
+      data={[...messages].reverse()}
+      renderItem={_renderItem}
+    />
+  );
 };
 
 export default ChatList;

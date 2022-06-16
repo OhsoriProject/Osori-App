@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Dimensions,
   Keyboard,
@@ -35,6 +35,7 @@ const LoginScreen = ({ navigation }) => {
   const onPressLogin = async () => {
     try {
       const result = await postSignIn(id, password);
+      console.log(result);
       setUser(result);
       navigation.replace("BottomNavigation");
     } catch (e) {

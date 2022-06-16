@@ -15,7 +15,6 @@ import { useRecoilState } from "recoil";
 
 const PlaylistMainScreen = ({ navigation }) => {
   const [playlists, setPlaylists] = useState();
-  const [user] = useRecoilState(UserIdAtom);
 
   const onPressPlaylist = (playlistId) => {
     navigation.navigate("PlaylistDetailScreen", { playlistId });
@@ -23,7 +22,7 @@ const PlaylistMainScreen = ({ navigation }) => {
 
   const getPlayList = async () => {
     try {
-      const result = await getPlaylistsRequest(user.id);
+      const result = await getPlaylistsRequest();
       setPlaylists(result.playlists);
     } catch (e) {
       console.log(e);
@@ -32,7 +31,7 @@ const PlaylistMainScreen = ({ navigation }) => {
 
   useEffect(() => {
     getPlayList();
-  }, [user]);
+  }, []);
 
   const _renderItem = ({ item, index }) => {
     return (

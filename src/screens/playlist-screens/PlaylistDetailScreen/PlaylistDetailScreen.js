@@ -50,8 +50,6 @@ const ButtonStyleNO = {
 const PlaylistDetailScreen = ({ navigation, route }) => {
   const youtubeRef = useRef();
 
-  const [user] = useRecoilState(UserIdAtom);
-
   const [videoIndex, setVideoIndex] = useState(0);
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -70,10 +68,7 @@ const PlaylistDetailScreen = ({ navigation, route }) => {
 
   const getPlaylistDetail = async () => {
     try {
-      const result = await getPlaylistDetailRequest(
-        user.id,
-        route.params.playlistId
-      );
+      const result = await getPlaylistDetailRequest(route.params.playlistId);
       setPlaylistDetail(result.playlist);
     } catch (e) {
       console.log(e);
@@ -82,7 +77,7 @@ const PlaylistDetailScreen = ({ navigation, route }) => {
 
   useEffect(() => {
     getPlaylistDetail();
-  }, [user]);
+  }, []);
 
   return (
     <Body>
