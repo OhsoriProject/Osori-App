@@ -25,6 +25,7 @@ import Modal from "react-native-modal";
 import colors from "utils/colors";
 import Space from "utils/styledSpace";
 import {
+  deletePlaylistsRequest,
   getPlaylistDetailRequest,
   postSavePlaylistRequest,
 } from "api/PlaylistAPI";
@@ -79,11 +80,25 @@ const PlaylistDetailScreen = ({ navigation, route }) => {
     setModalVisible(false);
   };
 
+  const onPressModalDelete = () => {
+    postDeletePlaylist(playlistId);
+    setModalVisible(false);
+    navigation.goBack();
+  };
+
   const handlePlaylistName = (text) => setPlaylistName(text);
 
   const postSavePlaylist = async (name, playlistId) => {
     try {
       await postSavePlaylistRequest(name, playlistId);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const postDeletePlaylist = async (playlistId) => {
+    try {
+      await deletePlaylistsRequest(playlistId);
     } catch (e) {
       console.log(e);
     }
@@ -142,35 +157,59 @@ const PlaylistDetailScreen = ({ navigation, route }) => {
         setVideoIndex={setVideoIndex}
       />
       <Modal isVisible={modalVisible}>
-        <ModalContainer>
-          <ModalWrapper>
-            <ModalTitleText>플레이리스트를 저장할까요?</ModalTitleText>
-            <ModalTitleSubText>
-              플레이리스트 이름을 입력해주세요
-            </ModalTitleSubText>
-            <Space h={4} />
-            <InputS
-              placeholder="최고의 플레이리스트!"
-              value={playlistName}
-              onChangeText={handlePlaylistName}
-            />
-            <ModalButtonContainer>
-              <ButtonS
-                onPress={onPressModalYes}
-                style={playlistName.length > 0 ? ButtonStyleYES : ButtonStyleNO}
-                textColor={playlistName.length > 0 ? "#f4f4f4" : colors.gray}
-                text="네 저장할께요"
+        {route.params.isChat ? (
+          <ModalContainer>
+            <ModalWrapper>
+              <ModalTitleText>플레이리스트를 저장할까요?</ModalTitleText>
+              <ModalTitleSubText>
+                플레이리스트 이름을 입력해주세요
+              </ModalTitleSubText>
+              <Space h={4} />
+              <InputS
+                placeholder="최고의 플레이리스트!"
+                value={playlistName}
+                onChangeText={handlePlaylistName}
               />
-              <Space w={4} />
-              <ButtonS
-                onPress={onPressModalNo}
-                style={ButtonStyleNO}
-                textColor={colors.black}
-                text="아니오"
-              />
-            </ModalButtonContainer>
-          </ModalWrapper>
-        </ModalContainer>
+              <ModalButtonContainer>
+                <ButtonS
+                  onPress={onPressModalYes}
+                  style={
+                    playlistName.length > 0 ? ButtonStyleYES : ButtonStyleNO
+                  }
+                  textColor={playlistName.length > 0 ? "#f4f4f4" : colors.gray}
+                  text="네 저장할께요"
+                />
+                <Space w={4} />
+                <ButtonS
+                  onPress={onPressModalNo}
+                  style={ButtonStyleNO}
+                  textColor={colors.black}
+                  text="아니오"
+                />
+              </ModalButtonContainer>
+            </ModalWrapper>
+          </ModalContainer>
+        ) : (
+          <ModalContainer>
+            <ModalWrapper>
+              <ModalTitleText>플레이리스트를 삭제할까요?</ModalTitleText>
+              <ModalButtonContainer>
+                <ButtonS
+                  onPress={onPressModalDelete}
+                  style={ButtonStyleYES}
+                  text="네 삭제할께요"
+                />
+                <Space w={4} />
+                <ButtonS
+                  onPress={onPressModalNo}
+                  style={ButtonStyleNO}
+                  textColor={colors.black}
+                  text="아니오"
+                />
+              </ModalButtonContainer>
+            </ModalWrapper>
+          </ModalContainer>
+        )}
       </Modal>
     </Body>
   );

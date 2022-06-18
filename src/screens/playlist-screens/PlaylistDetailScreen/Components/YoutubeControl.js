@@ -41,11 +41,9 @@ const YoutubeControl = ({
         </ControlItem>
         <TitleText numberOfLines={1}>{currentTitle}</TitleText>
       </ControlWrapper>
-      {isChat && (
-        <TouchableOpacity onPress={onPressMore && onPressMore}>
-          <IcMore />
-        </TouchableOpacity>
-      )}
+      <TouchableOpacity onPress={onPressMore && onPressMore}>
+        <IcMore />
+      </TouchableOpacity>
     </ControlContainer>
   );
 };
