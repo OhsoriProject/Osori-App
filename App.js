@@ -38,11 +38,18 @@ const App = () => {
   const isDarkMode = useColorScheme() === "dark";
   const navigationRef = useNavigationContainerRef();
 
-  const [user] = useRecoilState(UserIdAtom);
+  const [user, setUser] = useRecoilState(UserIdAtom);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
+  // useEffect(() => {
+  //   setUser({
+  //     id: null,
+  //     nickname: null,
+  //   });
+  // }, []);
 
   useEffect(() => {
     if (!user.id) {

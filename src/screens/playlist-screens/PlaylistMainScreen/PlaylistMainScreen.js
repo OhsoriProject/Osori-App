@@ -1,6 +1,6 @@
 import { getPlaylistsRequest } from "api/PlaylistAPI";
 import { HeaderM, ListPlaylist } from "components/index";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   SafeAreaView,
   Text,
@@ -12,6 +12,7 @@ import { UserIdAtom } from "store/atom/auth";
 import styled from "styled-components";
 import normalize from "utils/normalize";
 import { useRecoilState } from "recoil";
+import { useFocusEffect } from "@react-navigation/native";
 
 const PlaylistMainScreen = ({ navigation }) => {
   const [playlists, setPlaylists] = useState();
@@ -33,9 +34,11 @@ const PlaylistMainScreen = ({ navigation }) => {
     }
   };
 
-  useEffect(() => {
-    getPlayList();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      getPlayList();
+    }, [])
+  );
 
   const _renderItem = ({ item, index }) => {
     return (

@@ -31,6 +31,7 @@ const SignupScreen = ({ navigation }) => {
   const onPressSignup = async () => {
     try {
       const result = await postSignUp(id, password, nickname);
+      console.log(result);
       goLoginScreen();
     } catch (e) {
       console.log("signupError", e);
