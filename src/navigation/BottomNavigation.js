@@ -4,6 +4,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import ChatNavigation from "./ChatNavigation";
 import PlaylistNavigation from "./PlaylistNavigation";
+import IcChat from "assets/images/svgs/IcChat.svg";
+import IcChatActive from "assets/images/svgs/IcChatActive.svg";
+import IcList from "assets/images/svgs/IcList.svg";
+import IcListActive from "assets/images/svgs/IcListActive.svg";
 
 const Tab = createBottomTabNavigator();
 
@@ -19,12 +23,14 @@ const mainRoutes = [
     component: ChatNavigation,
     initRouteName: "ChatMainScreen",
     label: "채팅",
+    activeIcon: (focused) => (focused ? <IcChatActive /> : <IcChat />),
   },
   {
     name: "PlaylistNavigation",
     component: PlaylistNavigation,
     initRouteName: "PlaylistMainScreen",
     label: "플레이리스트",
+    activeIcon: (focused) => (focused ? <IcListActive /> : <IcList />),
   },
 ];
 
@@ -63,12 +69,12 @@ export default function BottomNavigation() {
             },
           })}
           options={{
-            // tabBarIcon: ({focused}) => {
-            //   return focused
-            //     ? data.activeIcon(focused)
-            //     : data.activeIcon(focused);
-            //   // return focused ? route.activeIcon() : route.activeIcon()
-            // },
+            tabBarIcon: ({ focused }) => {
+              return focused
+                ? data.activeIcon(focused)
+                : data.activeIcon(focused);
+              // return focused ? route.activeIcon() : route.activeIcon()
+            },
             tabBarLabel: data.label,
             tabBarInactiveTintColor: "#4F4F4F",
           }}
