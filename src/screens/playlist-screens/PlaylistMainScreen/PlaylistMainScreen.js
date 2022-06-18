@@ -17,7 +17,7 @@ const PlaylistMainScreen = ({ navigation }) => {
   const [playlists, setPlaylists] = useState();
 
   const onPressPlaylist = (playlistId) => {
-    navigation.navigate("PlaylistDetailScreen", { playlistId });
+    navigation.navigate("PlaylistDetailScreen", { playlistId, isChat: false });
   };
 
   const getPlayList = async () => {
@@ -36,9 +36,10 @@ const PlaylistMainScreen = ({ navigation }) => {
   const _renderItem = ({ item, index }) => {
     return (
       <ListPlaylist
-        onPress={onPressPlaylist}
-        title={item.title}
+        onPress={() => onPressPlaylist(item.id)}
+        title={item.name}
         songNum={item.length}
+        url={item.thumbnail}
       />
     );
   };

@@ -6,7 +6,14 @@ import normalize from "utils/normalize";
 
 import IcMore from "assets/images/svgs/IcMore.svg";
 
-const CardYoutube = ({ youtubeRef, videoList = [], setVideoIndex }) => {
+let beforeState = "unstarted";
+
+const CardYoutube = ({
+  youtubeRef,
+  videoList = [],
+  setVideoIndex,
+  videoId,
+}) => {
   const onReadyVideo = async () => {
     const musicIndex = await youtubeRef.current?.getVideosIndex();
     console.log("아아아", musicIndex);
@@ -16,13 +23,26 @@ const CardYoutube = ({ youtubeRef, videoList = [], setVideoIndex }) => {
     <Container>
       <YouTube
         ref={youtubeRef}
-        //   videoId="vg6Iq_Es3Wk" // The YouTube video ID
-        videoIds={videoList}
-        //   play // control playback of video with true/false
+        // videoId="8dJyRm2jJ-U" // The YouTube video ID
+        videoId={videoId}
+        // videoIds={videoList}
+        play // control playback of video with true/false
         fullscreen // control whether the video should play in fullscreen or inline
-        loop // control whether the video should loop when ended
+        // loop // control whether the video should loop when ended
         onChangeState={(e) => {
-          onReadyVideo();
+          // onReadyVideo();
+          // console.log("아아아", e);
+          if (
+            (beforeState == "buffering" && e.state == "unstarted") ||
+            e.state == "ended"
+          ) {
+            setVideoIndex((p) => p + 1);
+          }
+          beforeState = e.state;
+        }}
+        onReady={(e) => {
+          // console.log(e);
+          console.log(e);
         }}
         // onChangeState={(e) => {}}
         onChangeQuality={(e) => {}}

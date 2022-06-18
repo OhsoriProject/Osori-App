@@ -10,8 +10,8 @@ export const getPlaylistDetailRequest = async (playlistId) => {
   return response;
 };
 
-export const postSavePlaylistRequest = async (name, musics) => {
-  const response = await postRequest(`/playlist`, { name, musics });
+export const postSavePlaylistRequest = async (name, playlistId) => {
+  const response = await postRequest(`/playlist`, { name, playlistId });
   return response;
 };
 

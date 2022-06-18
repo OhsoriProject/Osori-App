@@ -3,24 +3,32 @@ import React from "react";
 import styled from "styled-components";
 import normalize from "utils/normalize";
 import Space from "utils/styledSpace";
+import { useNavigation } from "@react-navigation/native";
 
 const ChatList = ({ messages }) => {
+  const navigation = useNavigation();
+  const onPressPlaylist = (playlistId) => {
+    console.log(playlistId);
+    navigation.navigate("PlaylistDetailScreen", { playlistId, isChat: true });
+  };
   const _renderItem = ({ item, index }) => {
-    if (!item.hasOwnProperty("playlist")) {
+    if (item.sender == "user") {
       return (
         <>
           <Space h={16} />
-          <ChattingBubble
-            message={item.content}
-            isMe={item.sender === "user"}
-          />
+          <ChattingBubble message={item.content} isMe={item.sender == "user"} />
         </>
       );
     } else {
       return (
         <>
           <Space h={16} />
-          <PlaylistBubble />
+          <PlaylistBubble
+            item={item}
+            onPress={() => onPressPlaylist(item.id)}
+          />
+          <Space h={16} />
+          <ChattingBubble message={item.content} isMe={item.sender == "user"} />
         </>
       );
     }

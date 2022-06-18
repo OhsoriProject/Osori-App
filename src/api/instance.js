@@ -63,10 +63,10 @@ export const instance = () => {
           {
             text: "확인",
             onPress: () => {
-              setRecoil(UserIdAtom, {
-                id: null,
-                nickname: null,
-              });
+              // setRecoil(UserIdAtom, {
+              //   id: null,
+              //   nickname: null,
+              // });
               // 로그인 페이지로 이동
               // navigation.navigate("Login");
             },

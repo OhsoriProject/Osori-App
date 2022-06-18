@@ -7,12 +7,24 @@ import IcNext from "assets/images/svgs/IcNext.svg";
 import Modal from "react-native-modal";
 import { ButtonS } from "components/index";
 
-const YoutubeControl = ({ youtubeRef, onPressMore, currentTitle = "제목" }) => {
+const YoutubeControl = ({
+  youtubeRef,
+  onPressMore,
+  currentTitle = "제목",
+  setVideoIndex,
+  videoIndex,
+  playlists,
+  isChat,
+}) => {
   const onPressPrevious = () => {
-    youtubeRef.current.previousVideo();
+    // youtubeRef.current.previousVideo();
+    if (videoIndex > 0) setVideoIndex((p) => p - 1);
+    else setVideoIndex(playlists.length - 1);
   };
   const onPressNext = () => {
-    youtubeRef.current.nextVideo();
+    // youtubeRef.current.nextVideo();
+    if (videoIndex < playlists.length - 1) setVideoIndex((p) => p + 1);
+    else setVideoIndex(0);
   };
 
   return (
@@ -29,9 +41,11 @@ const YoutubeControl = ({ youtubeRef, onPressMore, currentTitle = "제목" }) =>
         </ControlItem>
         <TitleText numberOfLines={1}>{currentTitle}</TitleText>
       </ControlWrapper>
-      <TouchableOpacity onPress={onPressMore && onPressMore}>
-        <IcMore />
-      </TouchableOpacity>
+      {isChat && (
+        <TouchableOpacity onPress={onPressMore && onPressMore}>
+          <IcMore />
+        </TouchableOpacity>
+      )}
     </ControlContainer>
   );
 };

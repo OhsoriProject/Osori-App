@@ -48,6 +48,7 @@ const ChatScreen = () => {
   const getUserMessageList = async () => {
     try {
       const result = await getMessages();
+      console.log(result);
       setMessages(result.chats);
     } catch (e) {
       console.log(e);

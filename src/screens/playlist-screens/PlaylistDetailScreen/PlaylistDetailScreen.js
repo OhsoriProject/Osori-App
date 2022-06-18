@@ -4,8 +4,9 @@ import {
   ListMusicItem,
   ListPlaylist,
   ButtonS,
+  InputS,
 } from "components/index";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   SafeAreaView,
   Text,
@@ -23,6 +24,11 @@ import YoutubeControl from "./Components/YoutubeControl";
 import Modal from "react-native-modal";
 import colors from "utils/colors";
 import Space from "utils/styledSpace";
+import {
+  getPlaylistDetailRequest,
+  postSavePlaylistRequest,
+} from "api/PlaylistAPI";
+import { getMessageById } from "api/MessageApi";
 
 const TMP_VIDEO_LIST = ["", "vg6Iq_Es3Wk", "8dJyRm2jJ-U", "F9ldojZWBiM"];
 const TMP_PLAYLIST = [
@@ -53,23 +59,57 @@ const PlaylistDetailScreen = ({ navigation, route }) => {
   const [videoIndex, setVideoIndex] = useState(0);
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [playlistDetail, setPlaylistDetail] = useState({});
+  const [playlists, setPlaylists] = useState([]);
+  const [playlistId, setPlaylistId] = useState();
+
+  const [playlistName, setPlaylistName] = useState("");
+
   const onPressMore = () => {
     setModalVisible(true);
   };
 
   const onPressModalYes = () => {
-    setModalVisible(false);
+    if (playlistName.length > 0) {
+      postSavePlaylist(playlistName, playlistId);
+      setModalVisible(false);
+    }
   };
 
   const onPressModalNo = () => {
     setModalVisible(false);
   };
 
+  const handlePlaylistName = (text) => setPlaylistName(text);
+
+  const postSavePlaylist = async (name, playlistId) => {
+    try {
+      await postSavePlaylistRequest(name, playlistId);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const generatePlaylists = (items) => {
+    const playlists = [];
+    items.forEach((music) => {
+      playlists.push({ id: music.videoId, name: music.title });
+    });
+    setPlaylists(playlists);
+  };
+
   const getPlaylistDetail = async () => {
     try {
-      const result = await getPlaylistDetailRequest(route.params.playlistId);
-      setPlaylistDetail(result.playlist);
+      let result;
+      if (route.params?.isChat) {
+        result = await getMessageById(route.params.playlistId);
+        setPlaylistId(result.playlistId);
+        generatePlaylists(result.playlist);
+      } else {
+        console.log(route.params?.playlistId);
+        result = await getPlaylistDetailRequest(route.params.playlistId);
+        setPlaylistId(result.id);
+        generatePlaylists(result.musics);
+      }
     } catch (e) {
       console.log(e);
     }
@@ -84,27 +124,41 @@ const PlaylistDetailScreen = ({ navigation, route }) => {
       <HeaderM title="플레이리스트 상세 타이틀" />
       <CardYoutube
         youtubeRef={youtubeRef}
-        videoList={TMP_VIDEO_LIST}
         setVideoIndex={setVideoIndex}
+        videoId={playlists[videoIndex]?.id}
+        playlists={playlists}
       />
       <YoutubeControl
-        youtubeRef={youtubeRef}
         onPressMore={onPressMore}
-        currentTitle={TMP_PLAYLIST[videoIndex].name}
+        currentTitle={playlists[videoIndex]?.name}
+        setVideoIndex={setVideoIndex}
+        playlists={playlists}
+        videoIndex={videoIndex}
+        isChat={route.params?.isChat}
       />
       <FlatlistMusics
-        data={TMP_PLAYLIST}
-        youtubeRef={youtubeRef}
+        data={playlists}
         videoIndex={videoIndex}
+        setVideoIndex={setVideoIndex}
       />
       <Modal isVisible={modalVisible}>
         <ModalContainer>
           <ModalWrapper>
             <ModalTitleText>플레이리스트를 저장할까요?</ModalTitleText>
+            <ModalTitleSubText>
+              플레이리스트 이름을 입력해주세요
+            </ModalTitleSubText>
+            <Space h={4} />
+            <InputS
+              placeholder="최고의 플레이리스트!"
+              value={playlistName}
+              onChangeText={handlePlaylistName}
+            />
             <ModalButtonContainer>
               <ButtonS
                 onPress={onPressModalYes}
-                style={ButtonStyleYES}
+                style={playlistName.length > 0 ? ButtonStyleYES : ButtonStyleNO}
+                textColor={playlistName.length > 0 ? "#f4f4f4" : colors.gray}
                 text="네 저장할께요"
               />
               <Space w={4} />
@@ -151,10 +205,20 @@ const ModalTitleText = styled.Text`
   color: #000000;
 `;
 
+const ModalTitleSubText = styled.Text`
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 30px;
+
+  margin-top: ${normalize(4, "height")}px;
+
+  color: #000000;
+`;
+
 const ModalButtonContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-top: ${normalize(40, "height")}px;
+  margin-top: ${normalize(16, "height")}px;
 `;

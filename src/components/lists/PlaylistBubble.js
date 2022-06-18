@@ -4,16 +4,18 @@ import styled from "styled-components";
 import normalize from "utils/normalize";
 import colors from "utils/colors";
 
-const PlaylistBubble = ({ message, isMe, onPress }) => {
+const PlaylistBubble = ({ item, onPress }) => {
   return (
     <Container>
       <View style={{ display: "flex" }}>
         <PlaylistContainer>
           <PlaylistImage />
           <PlaylistInfoContainer>
-            <PlaylistTitleText>우울할 때 듣는 추천 Playlist</PlaylistTitleText>
-            <PlaylistSubTitleText>장르: 발라드, R&B</PlaylistSubTitleText>
-            <PlaylistSubTitleText>취중고백 외 25곡</PlaylistSubTitleText>
+            <PlaylistTitleText>오소리가 추천한 Playlist</PlaylistTitleText>
+            {/* <PlaylistSubTitleText>장르: 발라드, R&B</PlaylistSubTitleText> */}
+            <PlaylistSubTitleText>
+              {item.playlist[0].title}외 {item.playlist.length - 1}곡
+            </PlaylistSubTitleText>
           </PlaylistInfoContainer>
         </PlaylistContainer>
         <TouchableOpacity onPress={onPress && onPress}>

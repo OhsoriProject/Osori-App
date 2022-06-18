@@ -10,7 +10,7 @@ const ListPlaylist = ({ url, title, songNum, onPress }) => {
       <StyledImage source={{ url: url }} />
       <TitleContainer>
         <TitleText>{title}</TitleText>
-        <SubtitleText>{songNum}곡</SubtitleText>
+        {/* <SubtitleText>{songNum}곡</SubtitleText> */}
       </TitleContainer>
     </Container>
   );

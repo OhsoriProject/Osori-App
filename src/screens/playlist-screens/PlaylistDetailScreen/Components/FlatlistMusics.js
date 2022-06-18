@@ -5,19 +5,18 @@ import styled from "styled-components";
 import normalize from "utils/normalize";
 
 const FlatlistMusics = ({
-  youtubeRef,
   data,
-  onPress,
   style,
   keyExtractor,
   videoIndex,
+  setVideoIndex,
 }) => {
   const renderItem = ({ item, index }) => (
     <ListMusicItem
       id={item.id}
       title={item.name}
-      onPress={async () => {
-        youtubeRef.current.playVideoAt(index);
+      onPress={() => {
+        setVideoIndex(index);
       }}
       isPlay={videoIndex == index}
     />
