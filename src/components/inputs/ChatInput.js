@@ -10,7 +10,7 @@ const ChatInput = ({ value, onChangeText, onPress }) => {
       <StyledInput
         value={value}
         onChangeText={onChangeText && onChangeText}
-        placeholder="메시지를 입력하세요"
+        placeholder="우울할 때 들을만한 신나는 음악 추천해줘!"
       />
       <TouchableOpacity onPress={onPress && onPress}>
         <IcSend />

@@ -26,11 +26,15 @@ const ChatList = ({ messages }) => {
     } else {
       return (
         <>
-          <Space h={16} />
-          <PlaylistBubble
-            item={item}
-            onPress={() => onPressPlaylist(item.id)}
-          />
+          {item.hasOwnProperty("playlist") && (
+            <>
+              <Space h={16} />
+              <PlaylistBubble
+                item={item}
+                onPress={() => onPressPlaylist(item.id)}
+              />
+            </>
+          )}
           <Space h={16} />
           <ChattingBubble message={item.content} isMe={item.sender == "user"} />
         </>

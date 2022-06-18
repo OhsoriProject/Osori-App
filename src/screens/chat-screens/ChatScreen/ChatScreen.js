@@ -49,7 +49,15 @@ const ChatScreen = () => {
     try {
       const result = await getMessages();
       console.log(result);
-      setMessages(result.chats);
+      setMessages([
+        ...result.chats,
+        { content: "어떤 음악을 들려드릴까요?", sender: "bot" },
+        {
+          content: "현재 상황, 감정, 장르, 듣고싶은 분위기등을 이야기하면",
+          sender: "bot",
+        },
+        { content: "오소리가 음악을 찾아드릴께요", sender: "bot" },
+      ]);
     } catch (e) {
       console.log(e);
     }
@@ -61,8 +69,9 @@ const ChatScreen = () => {
     setMessages(newMessage);
     setText("");
     try {
-      await postMessage(text);
-      getUserMessageList();
+      const result = await postMessage(text);
+      let lastMessage = [...newMessage, { ...result, sender: "bot" }];
+      setMessages(lastMessage);
     } catch (e) {
       console.log(e);
     }

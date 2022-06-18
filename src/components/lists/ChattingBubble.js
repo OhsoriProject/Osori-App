@@ -28,11 +28,12 @@ const BubbleContainer = styled.View`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: ${normalize(4)}px ${normalize(8)}px;
+  padding: ${normalize(6)}px ${normalize(16)}px;
   border-radius: 24.97px;
   margin: 0px ${normalize(2)}px;
   background-color: ${(props) =>
     props.isMe ? colors.primary : colors.secondary};
+  max-width: ${normalize(240)}px;
 `;
 
 const BubbleSmall = styled.View`
@@ -48,7 +49,7 @@ const BubbleSmall = styled.View`
 const MessageText = styled(Text)`
   font-weight: 700;
   font-size: 16;
-  text-align: center;
+  /* text-align: center; */
   color: #f4f4f4;
   line-height: 21;
 `;
