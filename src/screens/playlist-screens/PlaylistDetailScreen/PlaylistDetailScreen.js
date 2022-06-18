@@ -121,7 +121,7 @@ const PlaylistDetailScreen = ({ navigation, route }) => {
 
   return (
     <Body>
-      <HeaderM title="플레이리스트 상세 타이틀" />
+      <HeaderM title={route.params?.title} />
       <CardYoutube
         youtubeRef={youtubeRef}
         setVideoIndex={setVideoIndex}

@@ -9,7 +9,11 @@ const ChatList = ({ messages }) => {
   const navigation = useNavigation();
   const onPressPlaylist = (playlistId) => {
     console.log(playlistId);
-    navigation.navigate("PlaylistDetailScreen", { playlistId, isChat: true });
+    navigation.navigate("PlaylistDetailScreen", {
+      playlistId,
+      isChat: true,
+      title: "오소리가 추천한 Playlist",
+    });
   };
   const _renderItem = ({ item, index }) => {
     if (item.sender == "user") {
