@@ -142,6 +142,7 @@ const PlaylistDetailScreen = ({ navigation, route }) => {
         setVideoIndex={setVideoIndex}
         videoId={playlists[videoIndex]?.id}
         playlists={playlists}
+        videoIndex={videoIndex}
       />
       <YoutubeControl
         onPressMore={onPressMore}

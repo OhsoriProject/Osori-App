@@ -13,6 +13,8 @@ const CardYoutube = ({
   videoList = [],
   setVideoIndex,
   videoId,
+  playlists,
+  videoIndex,
 }) => {
   const onReadyVideo = async () => {
     const musicIndex = await youtubeRef.current?.getVideosIndex();
@@ -36,7 +38,8 @@ const CardYoutube = ({
             (beforeState == "buffering" && e.state == "unstarted") ||
             e.state == "ended"
           ) {
-            setVideoIndex((p) => p + 1);
+            if (videoIndex < playlists.length - 1) setVideoIndex((p) => p + 1);
+            else setVideoIndex(0);
           }
           beforeState = e.state;
         }}
